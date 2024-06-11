@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=3 uid="uid://cjrxyw6oxtwhw"]
+
+[ext_resource type="Script" path="res://Smoke.cs" id="1_1f2i1"]
+[ext_resource type="Texture2D" uid="uid://citvcmwyhlqev" path="res://art/smoke09.png" id="1_iw68v"]
+[ext_resource type="Texture2D" uid="uid://cj0nkklyrnmjl" path="res://art/smoke08.png" id="2_xeqs5"]
+[ext_resource type="Texture2D" uid="uid://c0endd3808r3g" path="res://art/smoke07.png" id="3_vjd0j"]
+[ext_resource type="Texture2D" uid="uid://os7wwgc8k1h" path="res://art/smoke06.png" id="4_07nvn"]
+[ext_resource type="Texture2D" uid="uid://cyijowmjrccht" path="res://art/smoke05.png" id="5_7n5on"]
+[ext_resource type="Texture2D" uid="uid://d17cse4e0vp0o" path="res://art/smoke04.png" id="6_sc7cs"]
+[ext_resource type="Texture2D" uid="uid://vow5sfdwbnbp" path="res://art/smoke03.png" id="7_gvecd"]
+[ext_resource type="Texture2D" uid="uid://bsm6vumanfmji" path="res://art/smoke02.png" id="8_s52tp"]
+[ext_resource type="Texture2D" uid="uid://s61t7xmdd1pj" path="res://art/smoke01.png" id="9_qvdok"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x7lla"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_iw68v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xeqs5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vjd0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_07nvn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7n5on")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_sc7cs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gvecd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_s52tp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_qvdok")
+}],
+"loop": false,
+"name": &"smoke",
+"speed": 5.0
+}]
+
+[node name="Smoke" type="CharacterBody2D"]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_1f2i1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x7lla")
+animation = &"smoke"

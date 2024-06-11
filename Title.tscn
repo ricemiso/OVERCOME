@@ -1,0 +1,188 @@
+[gd_scene load_steps=8 format=3 uid="uid://croa1g6jktu6s"]
+
+[ext_resource type="Script" path="res://Title.cs" id="1_g0fgw"]
+[ext_resource type="FontFile" uid="uid://dhgoyk5lwlssq" path="res://font/JF-Dot-ShinonomeMin16B.ttf" id="2_m2eaq"]
+[ext_resource type="Texture2D" uid="uid://deik2cw604txl" path="res://art/Ope.png" id="2_xgbyy"]
+[ext_resource type="Texture2D" uid="uid://xi77qd8hgqv7" path="res://art/title_sample.png" id="3_o35p1"]
+[ext_resource type="AudioStream" uid="uid://dkn7sj31ii6o6" path="res://Sound/Cancel.mp3" id="3_vgktw"]
+[ext_resource type="Texture2D" uid="uid://d2pfg5r2n2fj4" path="res://art/OpeImage.png" id="4_ot7b7"]
+[ext_resource type="AudioStream" uid="uid://dwg2r4r3pxfte" path="res://Sound/Cursor.mp3" id="6_cpt8y"]
+
+[node name="Title" type="CanvasLayer"]
+script = ExtResource("1_g0fgw")
+
+[node name="TitleLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -168.0
+offset_right = 300.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 150
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="TextureRect" parent="TitleLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -354.0
+offset_top = -100.5
+offset_right = 354.0
+offset_bottom = 100.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_o35p1")
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -166.0
+offset_right = 125.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 50
+text = "Start"
+
+[node name="Message" type="Label" parent="."]
+visible = false
+offset_left = 325.0
+offset_top = 216.0
+offset_right = 860.0
+offset_bottom = 394.0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 128
+text = "Message"
+horizontal_alignment = 1
+
+[node name="MessageTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RestNumber" type="Label" parent="."]
+offset_left = 41.0
+offset_top = 24.0
+offset_right = 83.0
+offset_bottom = 115.0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 64
+text = "3"
+
+[node name="StageLabel" type="Label" parent="."]
+offset_left = 978.0
+offset_top = 626.0
+offset_right = 1170.0
+offset_bottom = 717.0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 64
+text = "Stage:"
+
+[node name="StageNumber" type="Label" parent="."]
+offset_left = 1173.0
+offset_top = 622.0
+offset_right = 1213.0
+offset_bottom = 713.0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 64
+text = "1"
+
+[node name="Score" type="Label" parent="."]
+offset_left = 9.0
+offset_top = 629.0
+offset_right = 201.0
+offset_bottom = 720.0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 64
+text = "Score:"
+
+[node name="ScoreNumber" type="Label" parent="."]
+offset_left = 212.0
+offset_top = 630.0
+offset_right = 252.0
+offset_bottom = 721.0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="HighScore" type="Label" parent="."]
+offset_left = 456.0
+offset_top = 4.0
+offset_right = 718.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 50
+text = "HighScore:"
+
+[node name="HighScoreNumber" type="Label" parent="."]
+offset_left = 710.0
+offset_top = 5.0
+offset_right = 750.0
+offset_bottom = 79.0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="ControlButton" type="Button" parent="."]
+custom_minimum_size = Vector2(230, 77)
+offset_left = 1008.0
+offset_top = 31.0
+offset_right = 1238.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 30
+text = "      操作説明"
+
+[node name="TextureRect" type="TextureRect" parent="ControlButton"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 1.0
+offset_right = 392.0
+offset_bottom = 401.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_ot7b7")
+
+[node name="OperationTexture" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(625, 347)
+scale = Vector2(0.966258, 0.966079)
+texture = ExtResource("2_xgbyy")
+
+[node name="CloseButton" type="Button" parent="OperationTexture"]
+custom_minimum_size = Vector2(126, 77)
+offset_left = -633.162
+offset_top = 266.466
+offset_right = -507.162
+offset_bottom = 343.466
+theme_override_fonts/font = ExtResource("2_m2eaq")
+theme_override_font_sizes/font_size = 25
+text = "Close"
+
+[node name="CloseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_vgktw")
+
+[node name="NoTouchTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="StartSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_cpt8y")
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="ControlButton" to="." method="_on_control_button_pressed"]
+[connection signal="pressed" from="OperationTexture/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="timeout" from="NoTouchTimer" to="." method="_on_notouch_timer_timeout"]

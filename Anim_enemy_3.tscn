@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvaxsn58r8urk"]
+
+[ext_resource type="Script" path="res://Anim_enemy_3.cs" id="1_8yhj5"]
+[ext_resource type="Texture2D" uid="uid://dlcgim8c2frf2" path="res://art/enemy06.png" id="2_pf86q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qcf6"]
+atlas = ExtResource("2_pf86q")
+region = Rect2(0, 0, 534, 800)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_piodm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qcf6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Anim_enemy_3" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_8yhj5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_piodm")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

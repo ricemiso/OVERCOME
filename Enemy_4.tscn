@@ -1,0 +1,111 @@
+[gd_scene load_steps=14 format=3 uid="uid://bshguua1qibbq"]
+
+[ext_resource type="Script" path="res://Enemy_4.cs" id="1_n5cbv"]
+[ext_resource type="PackedScene" uid="uid://ceqovqtsptl8k" path="res://Enemy_bullet.tscn" id="2_i71bu"]
+[ext_resource type="PackedScene" uid="uid://k4fsvv4i3h4e" path="res://Enemy_cannon_ver_2.tscn" id="3_seaxd"]
+[ext_resource type="Texture2D" uid="uid://dyalxhwx01ixn" path="res://art/boss1.png" id="4_64p3d"]
+[ext_resource type="Texture2D" uid="uid://d2cao6gi8t8qp" path="res://art/boss.png" id="5_4jfx3"]
+[ext_resource type="Texture2D" uid="uid://c75m8lwokcqc4" path="res://art/lastboss.png" id="6_wrkv0"]
+[ext_resource type="AudioStream" uid="uid://x1j161ckvo66" path="res://Sound/CannonCharge.mp3" id="8_s6b0e"]
+[ext_resource type="AudioStream" uid="uid://buj36222m8lhi" path="res://Sound/Cannon.mp3" id="9_6dqj0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbt5k"]
+atlas = ExtResource("4_64p3d")
+region = Rect2(0, 0, 800, 483)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31ljs"]
+atlas = ExtResource("5_4jfx3")
+region = Rect2(0, 0, 800, 566)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcuce"]
+atlas = ExtResource("6_wrkv0")
+region = Rect2(0, 0, 530, 800)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1wby8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbt5k")
+}],
+"loop": true,
+"name": &"level1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31ljs")
+}],
+"loop": true,
+"name": &"level2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcuce")
+}],
+"loop": true,
+"name": &"level3",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xi87d"]
+size = Vector2(93.6716, 87.146)
+
+[node name="Enemy_4" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(-1, -9.31323e-10)
+scale = Vector2(1, 0.918)
+collision_layer = 32
+collision_mask = 3
+script = ExtResource("1_n5cbv")
+Bullet = ExtResource("2_i71bu")
+ECannon = ExtResource("3_seaxd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_1wby8")
+animation = &"level1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.509, 3.268)
+shape = SubResource("RectangleShape2D_xi87d")
+
+[node name="LeftMuzzle" type="Node2D" parent="."]
+position = Vector2(-71, -35.9477)
+
+[node name="RightMuzzle" type="Node2D" parent="."]
+position = Vector2(-78, 33.7691)
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.8
+
+[node name="ShootTimer2" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="MovingTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="ChargeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="CannonTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="CannonPos" type="Node2D" parent="."]
+position = Vector2(-85, 1.01451e-09)
+
+[node name="ChargeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_s6b0e")
+pitch_scale = 3.0
+
+[node name="CannonSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_6dqj0")
+pitch_scale = 4.0
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="ShootTimer2" to="." method="_on_shoot_timer_2_timeout"]
+[connection signal="timeout" from="MovingTimer" to="." method="_on_moving_timer_timeout"]
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_charge_timer_timeout"]
+[connection signal="timeout" from="CannonTimer" to="." method="_on_cannon_timer_timeout"]

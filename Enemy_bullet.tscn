@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceqovqtsptl8k"]
+
+[ext_resource type="Script" path="res://EnemyBullet.cs" id="1_72u4k"]
+[ext_resource type="Texture2D" uid="uid://bf704q8jd08ke" path="res://art/BossCannon.png" id="2_dm7py"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdsbp"]
+atlas = ExtResource("2_dm7py")
+region = Rect2(49, 59, 710, 710)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nu2rl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdsbp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kh4rd"]
+size = Vector2(250, 216)
+
+[node name="EnemyBullet" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(0, 3)
+scale = Vector2(0.08, 0.08)
+collision_layer = 8
+safe_margin = 256.0
+script = ExtResource("1_72u4k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.52549, 0.52549, 0.52549, 1)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_nu2rl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_kh4rd")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rotation = 0.0181079
+scale = Vector2(0.6, 0.6)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

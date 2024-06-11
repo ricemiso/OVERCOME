@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5v7cquf1tfws"]
+
+[ext_resource type="Texture2D" uid="uid://6exxv8te6w4s" path="res://art/SpaceEnemy02.png" id="1_mvp7h"]
+[ext_resource type="Script" path="res://Enemy_2.cs" id="1_ubbtc"]
+[ext_resource type="PackedScene" uid="uid://ceqovqtsptl8k" path="res://Enemy_bullet.tscn" id="2_4jtdm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ic4yf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mvp7h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmwkn"]
+size = Vector2(24.4999, 22.0012)
+
+[node name="Enemy_2" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(0, 1)
+rotation = -1.5732
+collision_layer = 4
+collision_mask = 131
+safe_margin = 256.0
+script = ExtResource("1_ubbtc")
+Bullet = ExtResource("2_4jtdm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ic4yf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.499998, 2.00117)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_cmwkn")
+
+[node name="EscapeTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="timeout" from="EscapeTimer" to="." method="_on_escape_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

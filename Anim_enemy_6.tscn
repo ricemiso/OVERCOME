@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cts0achmyqwfn"]
+
+[ext_resource type="Script" path="res://Anim_enemy_6.cs" id="1_w2stc"]
+[ext_resource type="Texture2D" uid="uid://c75m8lwokcqc4" path="res://art/lastboss.png" id="2_3ts3p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_en6fl"]
+atlas = ExtResource("2_3ts3p")
+region = Rect2(0, 0, 530, 800)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nblvn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_en6fl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Anim_enemy_6" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_w2stc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_nblvn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

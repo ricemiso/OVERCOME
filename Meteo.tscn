@@ -1,0 +1,98 @@
+[gd_scene load_steps=21 format=3 uid="uid://dxvy43at38h2t"]
+
+[ext_resource type="Script" path="res://Meteo.cs" id="1_mqd0y"]
+[ext_resource type="Texture2D" uid="uid://1ud5kn31ycya" path="res://art/meteorite.png" id="1_omst1"]
+[ext_resource type="PackedScene" uid="uid://b3ctyrq5knwsu" path="res://Mini_meteo.tscn" id="2_2x86l"]
+[ext_resource type="Texture2D" uid="uid://x03y8ihqcimx" path="res://art/meteorite8.png" id="3_eomfh"]
+[ext_resource type="Texture2D" uid="uid://cbee512bahnnn" path="res://art/meteorite3.png" id="3_gmmr5"]
+[ext_resource type="Texture2D" uid="uid://7cyvcsbdtasr" path="res://art/meteorite2.png" id="4_g4ynq"]
+[ext_resource type="Texture2D" uid="uid://0bd0w0puqp3t" path="res://art/meteorite6.png" id="5_n7d6h"]
+[ext_resource type="Texture2D" uid="uid://mndyv33wujth" path="res://art/meteorite4.png" id="5_tnftq"]
+[ext_resource type="Texture2D" uid="uid://rnphcbjt1707" path="res://art/meteorite7.png" id="7_fucv5"]
+[ext_resource type="Texture2D" uid="uid://2p4w21rcutyq" path="res://art/meteorite5.png" id="9_l65lo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctbsp"]
+atlas = ExtResource("1_omst1")
+region = Rect2(29, 124, 540, 390)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s7j3"]
+atlas = ExtResource("3_eomfh")
+region = Rect2(0, 0, 441, 442)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6thqt"]
+atlas = ExtResource("3_gmmr5")
+region = Rect2(26, 50, 550, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1h3b"]
+atlas = ExtResource("5_n7d6h")
+region = Rect2(0, 0, 442, 441)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsx4v"]
+atlas = ExtResource("4_g4ynq")
+region = Rect2(58, 39, 550, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbye8"]
+atlas = ExtResource("7_fucv5")
+region = Rect2(0, 0, 441, 442)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7ea7"]
+atlas = ExtResource("5_tnftq")
+region = Rect2(27, 20, 550, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7dab"]
+atlas = ExtResource("9_l65lo")
+region = Rect2(0, 0, 442, 441)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eeem6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctbsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5s7j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6thqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1h3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsx4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbye8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7ea7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7dab")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3x15"]
+
+[node name="Meteo" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.2, 0.2)
+collision_layer = 256
+collision_mask = 3
+script = ExtResource("1_mqd0y")
+MiniMeteo = ExtResource("2_2x86l")
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eeem6")
+frame = 2
+frame_progress = 0.844148
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_b3x15")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

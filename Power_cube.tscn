@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://dh53syducv46d"]
+
+[ext_resource type="Script" path="res://PowerCube.cs" id="1_cy6o6"]
+[ext_resource type="Texture2D" uid="uid://bvxxuy6edlftb" path="res://art/PowerCube.png" id="2_7h7ab"]
+[ext_resource type="Texture2D" uid="uid://dhemp6gph7qfy" path="res://art/PowerCube2.png" id="3_2y0u4"]
+[ext_resource type="Texture2D" uid="uid://ehxo8wckoxjn" path="res://art/PowerCube3.png" id="4_07g1a"]
+[ext_resource type="Texture2D" uid="uid://demc1avlvek1e" path="res://art/PowerCube4.png" id="5_boqd2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7ohh"]
+atlas = ExtResource("2_7h7ab")
+region = Rect2(0, 0, 513, 511)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3gi2"]
+atlas = ExtResource("3_2y0u4")
+region = Rect2(0, 0, 511, 513)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cebt7"]
+atlas = ExtResource("4_07g1a")
+region = Rect2(0, 0, 513, 511)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oy5a3"]
+atlas = ExtResource("5_boqd2")
+region = Rect2(0, 0, 511, 513)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_64qjy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7ohh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3gi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cebt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oy5a3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gt8gt"]
+
+[node name="PowerCube" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.5, 0.5)
+collision_layer = 16
+script = ExtResource("1_cy6o6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_64qjy")
+frame_progress = 0.851273
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+scale = Vector2(-5.95462, 5.45245)
+shape = SubResource("CircleShape2D_gt8gt")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://0mx8kswmi1rh"]
+
+[ext_resource type="Texture2D" uid="uid://lcdvx7ks6gv3" path="res://art/SpaceEnemy01.png" id="1_bmy76"]
+[ext_resource type="Script" path="res://Enemy_1.cs" id="1_u6q4v"]
+[ext_resource type="PackedScene" uid="uid://ceqovqtsptl8k" path="res://Enemy_bullet.tscn" id="2_i6h3b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p6ar8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bmy76")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52gpt"]
+size = Vector2(38.5004, 53.5)
+
+[node name="Enemy_1" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 131
+safe_margin = 256.0
+script = ExtResource("1_u6q4v")
+Bullet = ExtResource("2_i6h3b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.59279
+sprite_frames = SubResource("SpriteFrames_p6ar8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.001, 0)
+rotation = -1.56988
+shape = SubResource("RectangleShape2D_52gpt")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

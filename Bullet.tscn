@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cj5d2lmfxo3sh"]
+
+[ext_resource type="Script" path="res://Bullet.cs" id="1_woly1"]
+[ext_resource type="Texture2D" uid="uid://d1b2fmptsahp7" path="res://art/ball.png" id="2_jxr8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1o8i"]
+atlas = ExtResource("2_jxr8o")
+region = Rect2(236, 328, 260, 260)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vxscv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1o8i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vdp3d"]
+radius = 25.974
+
+[node name="Bullet" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 356
+safe_margin = 256.0
+script = ExtResource("1_woly1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.08, 0.08)
+sprite_frames = SubResource("SpriteFrames_vxscv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.10543e-15, 3.55271e-15)
+scale = Vector2(0.385, 0.385)
+shape = SubResource("CircleShape2D_vdp3d")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1ldntruqol7b"]
+
+[ext_resource type="Script" path="res://CannonMan.cs" id="1_q38ar"]
+[ext_resource type="Texture2D" uid="uid://cl4omoxh13sy0" path="res://art/enemy07.png" id="2_4yvsv"]
+[ext_resource type="PackedScene" uid="uid://b1m8ye5tai17p" path="res://Cannon.tscn" id="2_35oyv"]
+[ext_resource type="AudioStream" uid="uid://x1j161ckvo66" path="res://Sound/CannonCharge.mp3" id="4_5xo0o"]
+[ext_resource type="AudioStream" uid="uid://buj36222m8lhi" path="res://Sound/Cannon.mp3" id="5_alkes"]
+[ext_resource type="Texture2D" uid="uid://dqv0uq3mny8r2" path="res://art/Cannon01.png" id="6_j0f05"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5avt"]
+atlas = ExtResource("2_4yvsv")
+region = Rect2(0, 0, 800, 679)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_021ws"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5avt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hyyrd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_j0f05")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="CannonMan" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_q38ar")
+Cannon = ExtResource("2_35oyv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_021ws")
+
+[node name="CannonTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ShootingTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="CannonPos" type="Node2D" parent="."]
+position = Vector2(114, 0)
+
+[node name="CargeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5xo0o")
+
+[node name="CannonManCannon" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_alkes")
+
+[node name="Cannon" type="AnimatedSprite2D" parent="."]
+position = Vector2(707, 14)
+scale = Vector2(1.52, 1)
+sprite_frames = SubResource("SpriteFrames_hyyrd")
+
+[connection signal="timeout" from="CannonTimer" to="." method="_on_cannon_timer_timeout"]
+[connection signal="timeout" from="ShootingTimer" to="." method="_on_shooting_timer_timeout"]

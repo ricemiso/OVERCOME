@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3ctyrq5knwsu"]
+
+[ext_resource type="Texture2D" uid="uid://1ud5kn31ycya" path="res://art/meteorite.png" id="1_3mlhp"]
+[ext_resource type="Script" path="res://Mini_meteo.cs" id="1_tt5pl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j5xq"]
+atlas = ExtResource("1_3mlhp")
+region = Rect2(0, 0, 625, 624)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_61rkx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j5xq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g5b72"]
+
+[node name="MiniMeteo" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.05, 0.05)
+collision_layer = 256
+collision_mask = 3
+safe_margin = 256.0
+script = ExtResource("1_tt5pl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_61rkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(16, 16)
+shape = SubResource("CircleShape2D_g5b72")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

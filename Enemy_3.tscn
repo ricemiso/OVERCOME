@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqp5dr4hw24jo"]
+
+[ext_resource type="Texture2D" uid="uid://dlcgim8c2frf2" path="res://art/enemy06.png" id="1_76j7c"]
+[ext_resource type="Script" path="res://Enemy_3.cs" id="1_o7p0t"]
+[ext_resource type="PackedScene" uid="uid://ceqovqtsptl8k" path="res://Enemy_bullet.tscn" id="2_8b46j"]
+[ext_resource type="PackedScene" uid="uid://dmce66mb83gxo" path="res://Mini_enemy_3.tscn" id="2_v8utu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1q5c2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_76j7c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y31i2"]
+size = Vector2(17.7778, 18.2058)
+
+[node name="Enemy_3" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.15, 0.15)
+collision_layer = 4
+collision_mask = 131
+script = ExtResource("1_o7p0t")
+Minienemy = ExtResource("2_v8utu")
+Bullet = ExtResource("2_8b46j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1q5c2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.33332)
+scale = Vector2(27, 25.2667)
+shape = SubResource("RectangleShape2D_y31i2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

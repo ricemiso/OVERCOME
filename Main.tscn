@@ -1,0 +1,127 @@
+[gd_scene load_steps=27 format=3 uid="uid://beg5tndrxhyru"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_cskf4"]
+[ext_resource type="PackedScene" uid="uid://0mx8kswmi1rh" path="res://Enemy_1.tscn" id="2_cxyj5"]
+[ext_resource type="PackedScene" uid="uid://dm6652kpx6n6y" path="res://Back_graund_space.tscn" id="3_gt0a0"]
+[ext_resource type="PackedScene" uid="uid://c5v7cquf1tfws" path="res://Enemy_2.tscn" id="3_usyfk"]
+[ext_resource type="PackedScene" uid="uid://bshguua1qibbq" path="res://Enemy_4.tscn" id="4_1cnf2"]
+[ext_resource type="PackedScene" uid="uid://djp2vnh2u3bvw" path="res://Player.tscn" id="4_howq3"]
+[ext_resource type="PackedScene" uid="uid://cqp5dr4hw24jo" path="res://Enemy_3.tscn" id="4_ltjv2"]
+[ext_resource type="PackedScene" uid="uid://dh53syducv46d" path="res://Power_cube.tscn" id="5_7ob5o"]
+[ext_resource type="PackedScene" uid="uid://d0lm0cyksbxj0" path="res://Hud.tscn" id="5_8l6lk"]
+[ext_resource type="PackedScene" uid="uid://dteg0qvfffwjp" path="res://Enemy_5.tscn" id="6_bo2iy"]
+[ext_resource type="PackedScene" uid="uid://dfcy6c8xrjkhj" path="res://Enemy_6.tscn" id="7_j4rex"]
+[ext_resource type="PackedScene" uid="uid://croa1g6jktu6s" path="res://Title.tscn" id="7_njsvv"]
+[ext_resource type="PackedScene" uid="uid://dxvy43at38h2t" path="res://Meteo.tscn" id="7_og8m2"]
+[ext_resource type="PackedScene" uid="uid://bmi2kd75bfd6g" path="res://Anim_player.tscn" id="9_d0wja"]
+[ext_resource type="PackedScene" uid="uid://c7tvwur2tdbf4" path="res://Anim_enemy_1.tscn" id="11_c4tj4"]
+[ext_resource type="PackedScene" uid="uid://vqv5oy87bbxi" path="res://Anim_enemy_2.tscn" id="12_2h7ky"]
+[ext_resource type="PackedScene" uid="uid://dvaxsn58r8urk" path="res://Anim_enemy_3.tscn" id="13_kmcha"]
+[ext_resource type="PackedScene" uid="uid://dbtvaqhdgj146" path="res://Anim_enemy_4.tscn" id="14_r88fi"]
+[ext_resource type="PackedScene" uid="uid://dqi43wb5w6rty" path="res://Anim_enemy_5.tscn" id="15_tjv27"]
+[ext_resource type="PackedScene" uid="uid://cts0achmyqwfn" path="res://Anim_enemy_6.tscn" id="16_pl58b"]
+[ext_resource type="PackedScene" uid="uid://cjrxyw6oxtwhw" path="res://Smoke.tscn" id="17_lew4y"]
+[ext_resource type="PackedScene" uid="uid://bk00muljcqppb" path="res://Game_clear.tscn" id="22_fefoq"]
+[ext_resource type="AudioStream" uid="uid://ca6p5p7kobaj7" path="res://Sound/Explode02.mp3" id="22_qlqkn"]
+[ext_resource type="AudioStream" uid="uid://dkqum8qpver18" path="res://Sound/Shooting_Stars_2.mp3" id="24_qvju0"]
+[ext_resource type="AudioStream" uid="uid://uxgxn2ynt0e8" path="res://Sound/maou_game_boss02.mp3" id="25_te3n4"]
+[ext_resource type="AudioStream" uid="uid://dmdj6ld6jksm" path="res://Sound/loop_148.wav" id="26_rdo5a"]
+
+[node name="Main" type="Node2D"]
+rotation = 0.00108438
+script = ExtResource("1_cskf4")
+Enemy_1 = ExtResource("2_cxyj5")
+Enemy_2 = ExtResource("3_usyfk")
+Enemy_3 = ExtResource("4_ltjv2")
+Enemy_4 = ExtResource("4_1cnf2")
+Enemy_5 = ExtResource("6_bo2iy")
+Enemy_6 = ExtResource("7_j4rex")
+PoewrCube = ExtResource("5_7ob5o")
+Meteo = ExtResource("7_og8m2")
+Anim_Player = ExtResource("9_d0wja")
+Anim_Enemy_1 = ExtResource("11_c4tj4")
+Anim_Enemy_2 = ExtResource("12_2h7ky")
+Anim_Enemy_3 = ExtResource("13_kmcha")
+Anim_Enemy_4 = ExtResource("14_r88fi")
+Anim_Enemy_5 = ExtResource("15_tjv27")
+Anim_Enemy_6 = ExtResource("16_pl58b")
+Smoke = ExtResource("17_lew4y")
+
+[node name="BackGraund_Space" parent="." instance=ExtResource("3_gt0a0")]
+
+[node name="Player" parent="." instance=ExtResource("4_howq3")]
+
+[node name="StartPosition" type="Node2D" parent="."]
+position = Vector2(218, 370)
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="BossTimer" type="Timer" parent="."]
+wait_time = 50.0
+one_shot = true
+
+[node name="HUD" parent="." instance=ExtResource("5_8l6lk")]
+
+[node name="Title" parent="." instance=ExtResource("7_njsvv")]
+
+[node name="GimmicksTimer" type="Timer" parent="."]
+wait_time = 8.0
+
+[node name="Anim_Player" type="Node2D" parent="."]
+position = Vector2(-56, 371)
+
+[node name="Anim_Player2" type="Node2D" parent="."]
+position = Vector2(1316, 380)
+
+[node name="Anim_enemy_1" type="Node2D" parent="."]
+position = Vector2(1538, 389)
+
+[node name="Anim_enemy_2" type="Node2D" parent="."]
+position = Vector2(1620, 327)
+
+[node name="Anim_enemy_3" type="Node2D" parent="."]
+position = Vector2(1623, 445)
+
+[node name="Anim_enemy_4" type="Node2D" parent="."]
+position = Vector2(1768.42, 383.083)
+rotation = 1.51395
+
+[node name="Anim_enemy_5" type="Node2D" parent="."]
+position = Vector2(1730.57, 522.124)
+
+[node name="Anim_enemy_6" type="Node2D" parent="."]
+position = Vector2(1728.23, 211.126)
+
+[node name="AnimTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="AnimTimer2" type="Timer" parent="."]
+
+[node name="ClearTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="GameClear" parent="." instance=ExtResource("22_fefoq")]
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_qvju0")
+
+[node name="BossBGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_te3n4")
+
+[node name="ClearBGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("26_rdo5a")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_qlqkn")
+
+[connection signal="Destroy" from="Player" to="." method="PlayerDestroy"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="BossTimer" to="." method="_on_boss_timer_timeout"]
+[connection signal="StartGame" from="Title" to="." method="NewGame"]
+[connection signal="timeout" from="GimmicksTimer" to="." method="_on_gimmicks_timer_timeout"]
+[connection signal="timeout" from="AnimTimer" to="." method="_on_anim_timer_timeout"]
+[connection signal="timeout" from="AnimTimer2" to="." method="_on_anim_timer_2_timeout"]
+[connection signal="timeout" from="ClearTimer" to="." method="_on_clear_timer_timeout"]
+[connection signal="GoneCredit" from="GameClear" to="." method="_on_game_clear_gone_credit"]

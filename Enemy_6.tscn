@@ -1,0 +1,60 @@
+[gd_scene load_steps=13 format=3 uid="uid://dfcy6c8xrjkhj"]
+
+[ext_resource type="Texture2D" uid="uid://bvr384ti3pu46" path="res://art/enemy08.png" id="1_7ixsd"]
+[ext_resource type="Script" path="res://Enemy_6.cs" id="1_j1ovj"]
+[ext_resource type="PackedScene" uid="uid://0mx8kswmi1rh" path="res://Enemy_1.tscn" id="2_f480w"]
+[ext_resource type="PackedScene" uid="uid://c5v7cquf1tfws" path="res://Enemy_2.tscn" id="3_jr5s1"]
+[ext_resource type="PackedScene" uid="uid://cqp5dr4hw24jo" path="res://Enemy_3.tscn" id="4_yji6o"]
+[ext_resource type="PackedScene" uid="uid://bshguua1qibbq" path="res://Enemy_4.tscn" id="5_n7lb0"]
+[ext_resource type="PackedScene" uid="uid://dqi43wb5w6rty" path="res://Anim_enemy_5.tscn" id="6_chcvd"]
+[ext_resource type="PackedScene" uid="uid://ceqovqtsptl8k" path="res://Enemy_bullet.tscn" id="7_q27fh"]
+[ext_resource type="PackedScene" uid="uid://k4fsvv4i3h4e" path="res://Enemy_cannon_ver_2.tscn" id="8_x5l63"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoemj"]
+atlas = ExtResource("1_7ixsd")
+region = Rect2(0, 0, 441, 800)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qmqi3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hoemj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slywi"]
+size = Vector2(224, 808)
+
+[node name="Enemy_6" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(1256, 325)
+scale = Vector2(0.89, 0.89)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_j1ovj")
+Enemy_1 = ExtResource("2_f480w")
+Enemy_2 = ExtResource("3_jr5s1")
+Enemy_3 = ExtResource("4_yji6o")
+Enemy_4 = ExtResource("5_n7lb0")
+Enemy_5 = ExtResource("6_chcvd")
+Bullet = ExtResource("7_q27fh")
+ECannon = ExtResource("8_x5l63")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-226.966, 25)
+sprite_frames = SubResource("SpriteFrames_qmqi3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-112.26, 26.6824)
+shape = SubResource("RectangleShape2D_slywi")
+
+[node name="enemySpawn" type="Node2D" parent="."]
+position = Vector2(-175.281, 150.562)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

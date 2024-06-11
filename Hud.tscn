@@ -1,0 +1,133 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0lm0cyksbxj0"]
+
+[ext_resource type="Script" path="res://Hud.cs" id="1_tbwn4"]
+[ext_resource type="FontFile" uid="uid://dhgoyk5lwlssq" path="res://font/JF-Dot-ShinonomeMin16B.ttf" id="2_ruc8n"]
+[ext_resource type="Texture2D" uid="uid://dh82jr6yagbf7" path="res://art/HPbar01.png" id="3_uyaiv"]
+[ext_resource type="Texture2D" uid="uid://br2a7ihqbp1ao" path="res://art/HPbar02.png" id="4_bndd1"]
+[ext_resource type="Script" path="res://Popup.cs" id="4_r1p7a"]
+[ext_resource type="Texture2D" uid="uid://b0snp2br46n4x" path="res://art/GuardBar02.png" id="5_7c258"]
+[ext_resource type="AudioStream" uid="uid://dkn7sj31ii6o6" path="res://Sound/Cancel.mp3" id="5_rcetl"]
+[ext_resource type="Texture2D" uid="uid://dn04qg2njnhyv" path="res://art/CannonBar02.png" id="7_l6cwr"]
+[ext_resource type="Texture2D" uid="uid://b61sjb0odd7bp" path="res://art/GuardBar.png" id="8_08jli"]
+[ext_resource type="Texture2D" uid="uid://cntqm6p3x8da5" path="res://art/CannonBar.png" id="8_quak4"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_tbwn4")
+
+[node name="HPBarFrame" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(500, 40)
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 1035.0
+offset_bottom = 299.0
+scale = Vector2(0.411015, 0.393367)
+step = 0.01
+value = 100.0
+texture_under = ExtResource("3_uyaiv")
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(500, 40)
+offset_left = 113.0
+offset_top = 25.0
+offset_right = 696.0
+offset_bottom = 197.0
+scale = Vector2(0.533402, 0.332754)
+max_value = 90.0
+step = 0.01
+value = 90.0
+texture_progress = ExtResource("4_bndd1")
+
+[node name="BarrierTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Barrier" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 157.0
+offset_right = 120.0
+offset_bottom = 188.0
+theme_override_fonts/font = ExtResource("2_ruc8n")
+theme_override_font_sizes/font_size = 20
+text = "Barrier(L)"
+
+[node name="Cannon" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 115.0
+offset_right = 110.0
+offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("2_ruc8n")
+theme_override_font_sizes/font_size = 20
+text = "Cannon (R)"
+
+[node name="BarrierBarFrame" type="TextureProgressBar" parent="."]
+offset_left = 122.0
+offset_top = 151.0
+offset_right = 1506.0
+offset_bottom = 362.0
+scale = Vector2(0.203181, 0.168614)
+texture_under = ExtResource("5_7c258")
+
+[node name="BarrierBar" type="TextureProgressBar" parent="."]
+offset_left = 124.0
+offset_top = 156.0
+offset_right = 283.0
+offset_bottom = 196.0
+scale = Vector2(1.74571, 0.989511)
+step = 0.01
+value = 100.0
+texture_progress = ExtResource("8_08jli")
+
+[node name="SpecialBarFrame" type="TextureProgressBar" parent="."]
+offset_left = 122.0
+offset_top = 112.0
+offset_right = 1501.0
+offset_bottom = 323.0
+scale = Vector2(0.203, 0.146)
+texture_under = ExtResource("7_l6cwr")
+
+[node name="SpecialBar" type="TextureProgressBar" parent="."]
+offset_left = 125.0
+offset_top = 112.0
+offset_right = 284.0
+offset_bottom = 152.0
+scale = Vector2(1.735, 0.937)
+step = 0.01
+value = 100.0
+texture_progress = ExtResource("8_quak4")
+
+[node name="Popup" type="Popup" parent="."]
+process_mode = 2
+size = Vector2i(1250, 700)
+content_scale_size = Vector2i(2500, 700)
+script = ExtResource("4_r1p7a")
+
+[node name="Label" type="Label" parent="Popup"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.5
+offset_top = -36.0
+offset_right = 72.5
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_ruc8n")
+theme_override_font_sizes/font_size = 100
+text = "Pause"
+
+[node name="CloseButton" type="Button" parent="Popup"]
+offset_left = 600.0
+offset_top = 500.0
+offset_right = 660.0
+offset_bottom = 536.0
+theme_override_fonts/font = ExtResource("2_ruc8n")
+theme_override_font_sizes/font_size = 20
+text = "Close"
+
+[node name="CancelSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_rcetl")
+
+[connection signal="timeout" from="BarrierTimer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Popup/CloseButton" to="Popup" method="_on_close_button_pressed"]
